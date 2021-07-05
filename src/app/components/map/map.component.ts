@@ -315,4 +315,12 @@ export class MapComponent implements OnInit {
       });
     });
   }
+
+  toogleLeftSidenav() {
+    if (this.sidenavContainer?.start?.opened) {
+      this.sidenavContainer.start.close();
+    } else {
+      this.sidenavContainer?.start?.open();
+    }
+  }
 }

@@ -24,95 +24,188 @@
 </div>
 <app-header></app-header>
 
-<mat-sidenav-container class="sidenav-container" #sidenavContainer>
-  <mat-sidenav class="sidenav-left" opened mode="side" position="start">
-    <app-vertical-page-principal [map]="getMap()"></app-vertical-page-principal>
-    <app-vertical-page-secondaire></app-vertical-page-secondaire>
-  </mat-sidenav>
+<div fxLayout>
+  <div fxFlex="40px" style="height: 100vh;z-index: 9;">
+    <div style="height: 60px;padding: 5px;padding-top: 0px;" class="back_black white pointer"
+      (click)="toogleLeftSidenav()">
+      <span style="font-weight: bold;font-size: x-small;">MENU</span>
+      <svg style="transition: 0.5s;" viewBox="0 0 124 124">
+        <g>
+          <path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z" fill="#FFFFFF" />
+          <path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"
+            fill="#FFFFFF" />
+          <path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"
+            fill="#FFFFFF" />
+        </g>
 
-  <mat-sidenav-content class="sidenav-content">
+      </svg>
+    </div>
+    <div fxLayout="column" style="height: 100%;" class="primaryColorBG white ">
+      <div fxFlex="33%" fxFlexAlign="center" class="three_menu pointer">
+        <div>
+          <span>
+            {{ 'left_menu.fonds' | translate }}
+          </span>
+          <svg x="0px" y="0px" viewBox="0 0 23.4 24.8" style="width: 30px;
+          height: 30px;
+          margin-left: 3px;
+          margin-top: 5px;">
+            <path d="M11.7,0L0,9.1l2.1,1.7l9.6,7.5l9.6-7.5l2.1-1.7L11.7,0z M11.7,21.5l-9.6-7.5L0,15.7l11.7,9.1
+        l11.7-9.1l-2.1-1.7L11.7,21.5z" class="white_fill" />
+          </svg>
+        </div>
 
-    <div id="map" (contextmenu)="
+      </div>
+      <div fxFlex="33%" fxFlexAlign="center" class="three_menu pointer ">
+        <div>
+          <span>
+            {{ 'left_menu.themes' | translate }}
+          </span>
+
+          <svg style="width: 30px;
+          height: 30px;
+          margin-left: 3px;
+          margin-top: 5px;" x="0px" y="0px" viewBox="0 0 17.1 15.1">
+
+            <g transform="translate(0 0)">
+              <path class="white_fill" d="M8.2,9.7c0.1,0.1,0.2,0.1,0.4,0.1c0.1,0,0.3-0.1,0.4-0.1c0.1-0.1,3.4-3,3.4-6
+c0-2.1-1.7-3.7-3.7-3.7C6.5,0,4.8,1.7,4.8,3.7C4.8,6.7,8,9.6,8.2,9.7z M8.5,2.8c0.5,0,1,0.4,1,1c0,0,0,0,0,0c0,0.5-0.4,1-1,1
+c0,0,0,0,0,0c-0.5,0-1-0.4-1-1c0,0,0,0,0,0C7.6,3.2,8,2.8,8.5,2.8C8.5,2.8,8.5,2.8,8.5,2.8z" />
+              <path class="white_fill" d="M15.7,9.7l-0.4-1.5c-0.1-0.2-0.3-0.4-0.6-0.4h-3.1c-0.1,0.2-0.2,0.3-0.4,0.5
+c-0.5,0.7-1.2,1.4-1.8,2c-0.3,0.2-0.6,0.3-0.9,0.3c-0.3,0-0.7-0.1-0.9-0.3C7,9.7,6.3,9,5.8,8.3C5.7,8.1,5.5,7.9,5.4,7.8H2.3
+c-0.3,0-0.5,0.2-0.6,0.4L1.3,10l11.5,2.1L15.7,9.7z" />
+              <path class="white_fill" d="M17.1,14.4L16,10.5l-5.5,4.6h6c0.3,0,0.6-0.3,0.6-0.6C17.1,14.5,17.1,14.4,17.1,14.4
+L17.1,14.4z" />
+              <path class="white_fill"
+                d="M2.8,11.1l-1.8-0.3l-1,3.6c0,0.2,0,0.4,0.1,0.5c0.1,0.1,0.3,0.2,0.5,0.2h2.2L2.8,11.1z" />
+              <path class="white_fill" d="M3.6,11.2v3.9h5.6l2.8-2.3L3.6,11.2z" />
+            </g>
+          </svg>
+
+        </div>
+
+      </div>
+      <div fxFlex="33%" fxFlexAlign="center" class="three_menu pointer">
+        <div>
+          <span>
+            {{ 'left_menu.ressources' | translate }}
+          </span>
+
+          <svg style="width: 30px;
+          height: 30px;
+          margin-left: 3px;
+          margin-top: 5px;" x="0px" y="0px" viewBox="0 0 512 512">
+            <g>
+              <g>
+                <g>
+                  <path class="white_fill" d="M469.333,85.333h-198.25l-39.542-39.542c-2-2-4.708-3.125-7.542-3.125H85.333c-23.531,0-42.667,19.135-42.667,42.667V384
+				c0,23.531,19.135,42.667,42.667,42.667h384C492.865,426.667,512,407.531,512,384V128C512,104.469,492.865,85.333,469.333,85.333z
+				" />
+                  <path class="white_fill" d="M21.333,405.333V91.267C8.642,98.667,0,112.275,0,128v298.667c0,23.531,19.135,42.667,42.667,42.667h384
+				c15.725,0,29.333-8.642,36.733-21.333H64C40.469,448,21.333,428.865,21.333,405.333z" />
+                </g>
+              </g>
+            </g>
+
+          </svg>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <mat-sidenav-container class="sidenav-container" #sidenavContainer>
+
+    <mat-sidenav class="sidenav-left" opened mode="side" position="start">
+      <app-vertical-page-principal [map]="getMap()"></app-vertical-page-principal>
+      <app-vertical-page-secondaire></app-vertical-page-secondaire>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+
+      <div id="map" (contextmenu)="
         rightMenuClick ? rightMenuClick.setRightClickPixel($event) : undefined
       " [shAttachMenu]=" rightMenuClick?.menu!" [shMenuData]="rightMenuClick ? rightMenuClick.listItems : []">
-      <div id="scale-map"></div>
-      <div id="mouse-position-map"></div>
+        <div id="scale-map"></div>
+        <div id="mouse-position-map"></div>
 
-      <div id="mly"></div>
-      <div id="mapi"></div>
+        <div id="mly"></div>
+        <div id="mapi"></div>
 
-      <input id="swipe" type="range"
-        style="background: transparent;width: 100%; z-index: 9999999999999999999999;  position: absolute;top: 45%;display: none;">
+        <input id="swipe" type="range"
+          style="background: transparent;width: 100%; z-index: 9999999999999999999999;  position: absolute;top: 45%;display: none;">
 
-      <div id="setCoordOverlay" style="display:none">
-        <button mat-mini-fab color="primary" (click)="close_setCoordOverlay()" matTooltip="Supprimer">
-          <em class="fas fa-times fa-lg" style="color:#fff;display:none"></em>
-        </button>
-      </div>
+        <div id="setCoordOverlay" style="display:none">
+          <button mat-mini-fab color="primary" (click)="close_setCoordOverlay()" matTooltip="Supprimer">
+            <em class="fas fa-times fa-lg" style="color:#fff;display:none"></em>
+          </button>
+        </div>
 
-      <div id="notifications">
-        <div class="text-center" id="spinner_loading">
-          <div class="lds-ripple">
-            <div style="background-color: #fff;"></div>
-            <div style="background-color: #fcfcfc;"></div>
+        <div id="notifications">
+          <div class="text-center" id="spinner_loading">
+            <div class="lds-ripple">
+              <div style="background-color: #fff;"></div>
+              <div style="background-color: #fcfcfc;"></div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div id="coord_caracteristics" style="display:none;margin-top: -20px;margin-left: -20px;">
-        <button mat-mini-fab color="primary" (click)="rightMenuClick?.close_caracteristique()" matTooltip="Fermer">
-          <em class="fas fa-times fa-lg" style="color:#fff;display:none"></em>
-          <em class="fas fa-dot-circle fa-lg" style="color:#fff;"></em>
-        </button>
-      </div>
+        <div id="coord_caracteristics" style="display:none;margin-top: -20px;margin-left: -20px;">
+          <button mat-mini-fab color="primary" (click)="rightMenuClick?.close_caracteristique()" matTooltip="Fermer">
+            <em class="fas fa-times fa-lg" style="color:#fff;display:none"></em>
+            <em class="fas fa-dot-circle fa-lg" style="color:#fff;"></em>
+          </button>
+        </div>
 
-      <div id="popup_mapillary" class="back_white popup">
-        <div class="popover top"
-          style="border-radius: 15px;display: block; top: -140px; left: -100px;text-align: center;padding: 6px;">
-          <div class="arrow " style="left: 57%;"></div>
-          <div class="popover-content" style="  padding: 0px;">
-            <div class="ol-unselectable">
-              <div>
-                <img src="" id="img_mappilary" style="  height: 120px;width: 160px;  border-radius: 6px;" alt="">
+        <div id="popup_mapillary" class="back_white popup">
+          <div class="popover top"
+            style="border-radius: 15px;display: block; top: -140px; left: -100px;text-align: center;padding: 6px;">
+            <div class="arrow " style="left: 57%;"></div>
+            <div class="popover-content" style="  padding: 0px;">
+              <div class="ol-unselectable">
+                <div>
+                  <img src="" id="img_mappilary" style="  height: 120px;width: 160px;  border-radius: 6px;" alt="">
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
-    </div>
-
-    <app-vertical-toolbar [zone]="zone" [modeCompare]="modeCompare" [modeMapillary]="modeMapillary" [map]="getMap()"
-      [dialog]="dialog" [sidenavContainer]="sidenavContainer" class="sidenav-content-toolbar whiteBG">
-    </app-vertical-toolbar>
+      <app-vertical-toolbar [zone]="zone" [modeCompare]="modeCompare" [modeMapillary]="modeMapillary" [map]="getMap()"
+        [dialog]="dialog" [sidenavContainer]="sidenavContainer" class="sidenav-content-toolbar">
+      </app-vertical-toolbar>
 
 
-    <div class="toogle-sidenav-right">
-      <ng-container *ngFor="let ritghtMenu_i of ritghtMenus">
-        <button [matBadge]="getBadgeLayers(ritghtMenu_i.name)" matBadgePosition="before" matBadgeColor="accent"
-          class="toogle-sidenav-right-button" *ngIf="ritghtMenu_i.enable" (click)="openRightMenu(ritghtMenu_i.name)"
-          [matTooltip]="
+      <div class="toogle-sidenav-right">
+        <ng-container *ngFor="let ritghtMenu_i of ritghtMenus">
+          <button [matBadge]="getBadgeLayers(ritghtMenu_i.name)" matBadgePosition="before" matBadgeColor="accent"
+            class="toogle-sidenav-right-button" *ngIf="ritghtMenu_i.enable" (click)="openRightMenu(ritghtMenu_i.name)"
+            [matTooltip]="
             'right_menu.button.' + [ritghtMenu_i.tooltip] | translate
           " mat-raised-button color="primary" style="width: 100%; border-radius: 0px" [ngClass]="{
             primaryColorBG: !ritghtMenu_i.active,
             whiteBG: ritghtMenu_i.active
           }">
-          <svg x="0px" y="0px" viewBox="0 0 23.4 24.8" style="width: 21px" *ngIf="ritghtMenu_i.name === 'toc'">
-            <path [ngClass]="{
+            <svg x="0px" y="0px" viewBox="0 0 23.4 24.8" style="width: 21px" *ngIf="ritghtMenu_i.name === 'toc'">
+              <path [ngClass]="{
                 primaryColorFill: ritghtMenu_i.active
               }" d="M11.7,0L0,9.1l2.1,1.7l9.6,7.5l9.6-7.5l2.1-1.7L11.7,0z M11.7,21.5l-9.6-7.5L0,15.7l11.7,9.1
 l11.7-9.1l-2.1-1.7L11.7,21.5z" fill="#fff" />
-          </svg>
+            </svg>
 
-          <svg x="0px" y="0px" viewBox="0 0 20.8 20.8" style="width: 21px" *ngIf="ritghtMenu_i.name === 'edition'">
-            <path [ngClass]="{
+            <svg x="0px" y="0px" viewBox="0 0 20.8 20.8" style="width: 21px" *ngIf="ritghtMenu_i.name === 'edition'">
+              <path [ngClass]="{
                 primaryColorFill: ritghtMenu_i.active
               }" d="M0,16.5v4.3h4.3L17.1,8l-4.3-4.3L0,16.5z M20.5,4.7c0.4-0.4,0.5-1.2,0-1.6c0,0,0,0,0,0
 l-2.7-2.7c-0.4-0.4-1.2-0.5-1.6,0c0,0,0,0,0,0L14,2.5l4.3,4.3L20.5,4.7L20.5,4.7z" fill="#fff" />
-          </svg>
+            </svg>
 
-          <svg style="width: 22px" x="0px" y="0px" viewBox="0 0 23.1 23.4" *ngIf="ritghtMenu_i.name === 'routing'">
-            <path [ngClass]="{
+            <svg style="width: 22px" x="0px" y="0px" viewBox="0 0 23.1 23.4" *ngIf="ritghtMenu_i.name === 'routing'">
+              <path [ngClass]="{
                 primaryColorFill: ritghtMenu_i.active
               }" fill="#fff" d="M3.9,15.6c-2.2,0-3.9,1.7-3.9,3.9s1.7,3.9,3.9,3.9s3.9-1.7,3.9-3.9c0,0,0,0,0,0
 C7.8,17.3,6,15.6,3.9,15.6z M3.9,21.1c-0.9,0-1.6-0.7-1.6-1.6s0.7-1.6,1.6-1.6c0.9,0,1.6,0.7,1.6,1.6c0,0,0,0,0,0
@@ -121,40 +214,41 @@ C23.1,2.2,21.4,0.4,19.2,0.4L19.2,0.4z M19.2,6c-0.9,0-1.6-0.7-1.6-1.6s0.7-1.6,1.6
 C20.9,5.2,20.1,6,19.2,6L19.2,6z M20.6,11.5l0,6.8c-0.1,2.8-2.5,4.9-5.3,4.8c-2.6-0.1-4.6-2.2-4.8-4.8V4.8C10.4,3.2,9,2.1,7.5,2.3
 C6.2,2.5,5.1,3.5,5,4.8l0,9.6l-2.3,0l0-9.6C2.9,2,5.2-0.1,8,0c2.6,0.1,4.7,2.2,4.8,4.8v13.6c0.2,1.5,1.6,2.6,3.1,2.5
 c1.3-0.1,2.3-1.2,2.5-2.5l0-6.8L20.6,11.5z" />
-          </svg>
+            </svg>
 
-          <em class="fas fa-th-list fa-lg" *ngIf="ritghtMenu_i.name === 'legend'" [ngClass]="{
+            <em class="fas fa-th-list fa-lg" *ngIf="ritghtMenu_i.name === 'legend'" [ngClass]="{
               white: !ritghtMenu_i.active,
               primaryColor: ritghtMenu_i.active
             }"></em>
 
-          <em class="fas fa-download fa-lg" *ngIf="ritghtMenu_i.name === 'download'" [ngClass]="{
+            <em class="fas fa-download fa-lg" *ngIf="ritghtMenu_i.name === 'download'" [ngClass]="{
               white: !ritghtMenu_i.active,
               primaryColor: ritghtMenu_i.active
             }"></em>
-        </button>
-      </ng-container>
-    </div>
+          </button>
+        </ng-container>
+      </div>
 
-  </mat-sidenav-content>
+    </mat-sidenav-content>
 
-  <mat-sidenav class="sidenav-right" closed mode="side" position="end">
-    <div class="sidenav-right-title" *ngIf="getRightMenuActive()">
-      {{ "right_menu." + getRightMenuActive()?.title + ".title" | translate }}
-      <span [hidden]="!getRightMenu('toc')?.active">
-        ({{ layersInToc.length }})
-      </span>
-    </div>
-    <div class="sidenav-right-title-fake"></div>
-    <div class="sidenav-right-content">
-      <app-active-layers [modeMapillary]="modeMapillary" [map]="getMap()" [hidden]="!getRightMenu('toc')?.active">
-      </app-active-layers>
-      <app-map-tools [map]="getMap()" [hidden]="!getRightMenu('edition')?.active">
-      </app-map-tools>
-      <app-routing [map]="getMap()" [hidden]="!getRightMenu('routing')?.active"></app-routing>
-      <app-legends [map]="getMap()" [hidden]="!getRightMenu('legend')?.active"></app-legends>
-      <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
-    </div>
-  </mat-sidenav>
-</mat-sidenav-container>
+    <mat-sidenav class="sidenav-right" closed mode="side" position="end">
+      <div class="sidenav-right-title" *ngIf="getRightMenuActive()">
+        {{ "right_menu." + getRightMenuActive()?.title + ".title" | translate }}
+        <span [hidden]="!getRightMenu('toc')?.active">
+          ({{ layersInToc.length }})
+        </span>
+      </div>
+      <div class="sidenav-right-title-fake"></div>
+      <div class="sidenav-right-content">
+        <app-active-layers [modeMapillary]="modeMapillary" [map]="getMap()" [hidden]="!getRightMenu('toc')?.active">
+        </app-active-layers>
+        <app-map-tools [map]="getMap()" [hidden]="!getRightMenu('edition')?.active">
+        </app-map-tools>
+        <app-routing [map]="getMap()" [hidden]="!getRightMenu('routing')?.active"></app-routing>
+        <app-legends [map]="getMap()" [hidden]="!getRightMenu('legend')?.active"></app-legends>
+        <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
 <app-right-menu-click [dialog]="dialog" [map]="getMap()"></app-right-menu-click>

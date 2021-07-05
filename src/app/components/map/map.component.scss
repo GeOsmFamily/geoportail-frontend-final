@@ -137,8 +137,11 @@ $height: calc(100% - 60px);
 }
 
 .sidenav-container {
-  width: 100%;
-  height: $height;
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 40px;
+  right: 0;
 }
 
 .sidenav-left {
@@ -247,7 +250,8 @@ $height: calc(100% - 60px);
     width: 60px;
     left: 0px;
     overflow: hidden;
-    background: url('/assets/icones/bandeau-GEOSM.svg');
+    background-color: transparent;
+    background: none;
     background-position-y: center;
   }
 
@@ -299,4 +303,29 @@ $height: calc(100% - 60px);
   app-download {
     padding-bottom: 140px;
   }
+}
+
+.three_menu {
+  width: 100%;
+  position: relative;
+}
+
+.three_menu>div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.three_menu>div span {
+  margin: 0px;
+  font-size: 22px;
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  text-orientation: sideways;
+  -webkit-text-orientation: sideways;
+  transform: rotate(180deg);
+  letter-spacing: 3px;
+  font-weight: bold;
 }
