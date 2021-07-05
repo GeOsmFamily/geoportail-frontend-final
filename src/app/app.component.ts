@@ -19,6 +19,6 @@ export class AppComponent implements OnInit {
   }
 
   public setTitle() {
-    this.titleService.setTitle('GeOsm ' + environment.nom.toLowerCase());
+    this.titleService.setTitle('Géoportail ' + environment.nom.toLowerCase());
   }
 }
