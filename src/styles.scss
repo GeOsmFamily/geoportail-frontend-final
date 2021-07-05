@@ -1,0 +1,264 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import "~@angular/cdk/overlay-prebuilt.css";
+@import './app/styles/theme';
+@import './app/styles/ol.scss';
+@import "./assets/css/animate.css";
+@include mat-core();
+@import './assets/font/avenir-next-rounded-pro-cufonfonts-webfont/style.scss';
+@import '~ngx-sharebuttons/themes/circles/circles-dark-theme';
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.shadow_5px {
+  box-shadow: inset 0 0 1px #ccc, 0 0 2px #434343;
+}
+
+::ng-deep .mat-dialog-container {
+  padding: 0px !important;
+}
+
+.mat-primary .mat-slider-thumb-label-text {
+  color: #fff !important;
+}
+
+input {
+  background: transparent !important;
+}
+
+
+/* ///// spinner ////////////// */
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid $primary;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+
+/* ////////////////////////////////////////// //spiner ////////////// */
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #f7f7f7;
+  box-shadow: inset 0 0 6px #f7f7f7;
+  background-color: #f7f7f7;
+  // border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f7f7f7;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #f7f7f7;
+  border-radius: 10px;
+
+}
+
+.mat-drawer-inner-container {
+  overflow-x: hidden !important;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #f7f7f7;
+  box-shadow: inset 0 0 6px #f7f7f7;
+  background-color: #f7f7f7;
+  // border-radius: 10px;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f7f7f7;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-thumb {
+  background-color: #f7f7f7;
+  border-radius: 10px;
+
+}
+
+mat-dialog-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #f7f7f7;
+  box-shadow: inset 0 0 6px #f7f7f7;
+  background-color: #f7f7f7;
+  // border-radius: 10px;
+}
+
+mat-dialog-container::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f7f7f7;
+}
+
+mat-dialog-container::-webkit-scrollbar-thumb {
+  background-color: #747678;
+  border-radius: 10px;
+
+}
+
+@keyframes ldio-qrmvwweyigc {
+  0% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0
+  }
+}
+
+.ldio-qrmvwweyigc div {
+  left: 50.760000000000005px;
+  top: 31.32px;
+  position: absolute;
+  animation: ldio-qrmvwweyigc linear 1s infinite;
+  background: #023f5f;
+  width: 6.48px;
+  height: 12.96px;
+  border-radius: 3.24px / 6.48px;
+  transform-origin: 3.24px 22.68px;
+}
+
+.ldio-qrmvwweyigc div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -0.9166666666666666s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -0.8333333333333334s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.75s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.6666666666666666s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.5833333333333334s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.5s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.4166666666666667s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.3333333333333333s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.25s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.16666666666666666s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.08333333333333333s;
+  background: #023f5f;
+}
+
+.ldio-qrmvwweyigc div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+  background: #023f5f;
+}
+
+.loadingio-spinner-spinner-tcavths9hy {
+  width: 108px;
+  height: 108px;
+  display: inline-block;
+  overflow: hidden;
+  background: transparent;
+}
+
+.ldio-qrmvwweyigc {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+  /* see note above */
+}
+
+.ldio-qrmvwweyigc div {
+  box-sizing: content-box;
+}

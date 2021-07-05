@@ -1,0 +1,34 @@
+<div class="app-header primaryColorBG text-center">
+
+  <span class="header_left">
+    <img src="assets/icones/logo-geosm.svg" style="width: 225px;height: 40px;left: 1px;top: 1px;position: absolute;"
+      alt="">
+    <img src="https://www.countryflags.io/{{ environment.countrycode }}/flat/64.png" class="drapeau_GC" alt="">
+
+    <span class="title_GC">{{environment.nom}} </span>
+  </span>
+
+  <app-search></app-search>
+  <mat-form-field appearance="standard" class="language_button" class="language_button ">
+    <mat-select (selectionChange)="change_language($event)" value="{{environment.default_language}}"
+      class="primary_transparent_bg">
+      <mat-option value="" disabled> -- --</mat-option>
+      <mat-option *ngFor="let lang of environment.avaible_language" value="{{lang}}"> <span
+          style="text-transform: capitalize;">{{lang}}</span> </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <img src="assets/icones/ID.png" class="Logos_GC_right" alt="">
+
+  <button mat-icon-button style="position: absolute;
+  top: 10px;
+  right: 10px;" matTooltip="{{ 'header.toolpit_info' | translate }}" (click)="openModalInfo()">
+    <svg x="0px" y="0px" viewBox="0 0 28.1 28.1" style="height: 22px;">
+
+      <path id="help-circle" class="whiteFill" d="M18.4,13l-1.3,1.3c-1.2,1-1.8,2.5-1.6,4h-2.8v-0.7c0-1.5,0.6-2.9,1.6-4l1.7-1.8
+c0.5-0.5,0.8-1.2,0.8-2c0-1.6-1.3-2.8-2.9-2.8c-1.5,0-2.7,1.2-2.8,2.8H8.4c0-3.1,2.5-5.6,5.6-5.6s5.6,2.5,5.6,5.6
+C19.7,11,19.2,12.2,18.4,13 M15.5,23.9h-2.8v-2.8h2.8 M14.1,0C6.3,0,0,6.3,0,14.1c0,7.8,6.3,14.1,14.1,14.1s14.1-6.3,14.1-14.1
+c0,0,0,0,0,0C28.1,6.3,21.8,0,14.1,0z" />
+    </svg>
+  </button>
+
+</div>
