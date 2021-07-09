@@ -55,6 +55,8 @@ export class MapComponent implements OnInit {
 
   modeCompare = false;
 
+  modeComment = false;
+
   @ViewChild(MatSidenavContainer, { static: true })
   sidenavContainer: MatSidenavContainer | undefined;
 
@@ -257,6 +259,11 @@ export class MapComponent implements OnInit {
           parametersShared,
           parametersPath
         );
+      }
+      if (params['share'] && params['id']) {
+        var parametersShared = params['share'].split(';');
+        var parametersId = params['id'];
+        this.shareService.displayDrawShared(parametersShared, parametersId);
       }
     });
   }
