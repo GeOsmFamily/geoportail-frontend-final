@@ -31,12 +31,13 @@
   transition: 0.5s;
   z-index: 99999999;
   // bottom: -65px;
-  // left: 20px;
+  margin-left: 120px;
+  margin-top: -32px;
   // right: 0px;
 }
 
 .menu-thematiques-child-title p {
-  font-size: 11px;
+  font-size: 13px;
   position: absolute;
   // margin-left: 5px;
   left: 54%;
@@ -46,6 +47,7 @@
   color: #000;
   font-weight: bold;
   line-height: 15px;
+  text-transform: uppercase;
 }
 
 .menu-thematiques-child-nombre {

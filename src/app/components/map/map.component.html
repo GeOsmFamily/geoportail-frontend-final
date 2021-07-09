@@ -25,6 +25,8 @@
 <app-header></app-header>
 
 <div fxLayout>
+
+
   <div fxFlex="40px" style="height: 100vh;z-index: 9;">
     <div style="height: 60px;padding: 5px;padding-top: 0px;" class="back_black white pointer"
       (click)="toogleLeftSidenav()">
@@ -41,7 +43,8 @@
       </svg>
     </div>
     <div fxLayout="column" style="height: 100%;" class="primaryColorBG white ">
-      <div fxFlex="33%" fxFlexAlign="center" class="three_menu pointer">
+      <div fxFlex="33%" (click)="openMenu('cartes')" [ngClass]="{'back_black': menuActif === 'cartes'}"
+        fxFlexAlign="center" class="three_menu pointer">
         <div>
           <span>
             {{ 'left_menu.fonds' | translate }}
@@ -56,7 +59,8 @@
         </div>
 
       </div>
-      <div fxFlex="33%" fxFlexAlign="center" class="three_menu pointer ">
+      <div fxFlex="33%" (click)="openMenu('thematiques')" [ngClass]="{'back_black': menuActif === 'thematiques'}"
+        fxFlexAlign="center" class="three_menu pointer ">
         <div>
           <span>
             {{ 'left_menu.themes' | translate }}
@@ -85,7 +89,8 @@ L17.1,14.4z" />
         </div>
 
       </div>
-      <div fxFlex="33%" fxFlexAlign="center" class="three_menu pointer">
+      <div fxFlex="33%" fxFlexAlign="center" (click)="openMenu('ressources')"
+        [ngClass]="{'back_black': menuActif === 'ressources'}" class="three_menu pointer">
         <div>
           <span>
             {{ 'left_menu.ressources' | translate }}
@@ -114,12 +119,29 @@ L17.1,14.4z" />
       </div>
     </div>
   </div>
+  <mat-sidenav-container class="sidenav-container back_white" #sidenavContainer>
 
 
-  <mat-sidenav-container class="sidenav-container" #sidenavContainer>
 
-    <mat-sidenav class="sidenav-left" opened mode="side" position="start">
-      <app-vertical-page-principal [map]="getMap()"></app-vertical-page-principal>
+    <mat-sidenav [(opened)]="opened_left" (opened)="events_left='open'" (closed)="events_left='close'"
+      style="background: #fff;width: 260px;padding: 5px;padding-top: 10px" class="sidenav-left" opened mode="side"
+      position="start">
+      <div *ngIf="menuActif === 'thematiques'">
+
+        <app-thematique-city></app-thematique-city>
+
+      </div>
+
+      <div *ngIf="menuActif === 'cartes'" class="pointer menu-thematiques-parent"
+        style="margin-top:0px;padding-right: 5px;">
+        <app-vertical-page-principal [map]="getMap()"></app-vertical-page-principal>
+      </div>
+
+      <div *ngIf="menuActif === 'ressources'">
+        <app-ressources></app-ressources>
+      </div>
+
+
       <app-vertical-page-secondaire></app-vertical-page-secondaire>
     </mat-sidenav>
 
@@ -130,6 +152,8 @@ L17.1,14.4z" />
       " [shAttachMenu]=" rightMenuClick?.menu!" [shMenuData]="rightMenuClick ? rightMenuClick.listItems : []">
         <div id="scale-map"></div>
         <div id="mouse-position-map"></div>
+
+
 
         <div id="mly"></div>
         <div id="mapi"></div>

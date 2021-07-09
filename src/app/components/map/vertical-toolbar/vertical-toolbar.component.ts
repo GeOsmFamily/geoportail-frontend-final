@@ -477,6 +477,7 @@ export class VerticalToolbarComponent implements OnInit {
         this.sidenavContainer?.start?.open();
         document.getElementById('mly')!.style.display = 'none';
         this.map?.setTarget('map');
+        this.map?.updateSize();
       }
 
       if (this.layerInCompare.length != 0) {

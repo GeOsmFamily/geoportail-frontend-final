@@ -61,6 +61,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { GeosignetComponent } from './components/geosignet/geosignet/geosignet.component';
 import { ListGeosignetComponent } from './components/geosignet/list-geosignet/list-geosignet.component';
 import { CommentComponent } from './components/map/vertical-page-right/map-tools/comment/comment.component';
+import { ThematiqueCityComponent } from './components/map/vertical-page-left/thematique-city/thematique-city.component';
+import { RessourcesComponent } from './components/map/vertical-page-left/ressources/ressources.component';
 
 const customConfig: ShareButtonsConfig = {
   include: ['copy', 'facebook', 'twitter', 'linkedin', 'messenger', 'whatsapp'],
@@ -114,6 +116,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     GeosignetComponent,
     ListGeosignetComponent,
     CommentComponent,
+    ThematiqueCityComponent,
+    RessourcesComponent,
   ],
   imports: [
     NgpSortModule,

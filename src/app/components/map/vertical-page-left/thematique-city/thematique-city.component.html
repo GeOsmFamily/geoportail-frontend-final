@@ -1,0 +1,7 @@
+<div style="margin-top: 20px;" *ngFor="
+    let groupThematique of storageService.getAllGroupThematiques()
+      | sortBy: 'asc':'ordre'
+  ">
+  <app-groupe-thematique (click)="openGroupThematiqueSlide(groupThematique)" class="pointer"
+    [groupThematique]="groupThematique"></app-groupe-thematique>
+</div>

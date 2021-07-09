@@ -20,16 +20,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SocialShareComponent } from '../components/social-share/social-share.component';
 import { DownloadDataModelInterface } from '../interfaces/downloadDataModelInterface';
 import { ListDownloadLayersComponent } from '../components/map/vertical-page-right/download/ListDownloadLayers/ListDownloadLayers.component';
-import { Coordinate } from 'ol/coordinate';
 import { CaracteristicSheet } from '../interfaces/caracteristicSheetInterface';
 import { CaracteristiquesLieuModalComponent } from '../components/modal/caracteristiques-lieu-modal/caracteristiques-lieu-modal.component';
 import { GeosignetComponent } from '../components/geosignet/geosignet/geosignet.component';
+import { ThematiqueCityComponent } from '../components/map/vertical-page-left/thematique-city/thematique-city.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComponentHelper {
   verticalPageSecondaire: VerticalPageSecondaireComponent | undefined;
+  thematiqueCity: ThematiqueCityComponent | undefined;
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,

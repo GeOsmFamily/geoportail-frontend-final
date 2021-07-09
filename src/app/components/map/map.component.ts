@@ -23,6 +23,8 @@ import { LayersInMap } from 'src/app/interfaces/layersInMapInterface';
 import { ActivatedRoute } from '@angular/router';
 import { DataFromClickOnMapInterface } from 'src/app/interfaces/dataClickInterface';
 import { RightMenuClickComponent } from './right-menu-click/right-menu-click.component';
+import { VerticalPagePrincipalComponent } from './vertical-page-left/vertical-page-principal/vertical-page-principal.component';
+import { environment } from 'src/environments/environment';
 
 const scaleControl = new ScaleLine();
 var attribution = new Attribution({ collapsible: false });
@@ -57,11 +59,15 @@ export class MapComponent implements OnInit {
 
   modeComment = false;
 
+  opened_left: boolean = true;
+
+  events_left = 'close';
+
   @ViewChild(MatSidenavContainer, { static: true })
   sidenavContainer: MatSidenavContainer | undefined;
 
   @ViewChild(VerticalPageSecondaireComponent, { static: true })
-  verticalPagePrincipalComponent: VerticalPageSecondaireComponent | undefined;
+  verticalPageSecondaireComponent: VerticalPageSecondaireComponent | undefined;
 
   @ViewChild(RightMenuClickComponent, { static: true })
   rightMenuClick: RightMenuClickComponent | undefined;
@@ -122,7 +128,7 @@ export class MapComponent implements OnInit {
   ngAfterViewInit() {
     this.componentHelper.setComponent(
       'VerticalPageSecondaireComponent',
-      this.verticalPagePrincipalComponent
+      this.verticalPageSecondaireComponent
     );
   }
 
@@ -149,6 +155,9 @@ export class MapComponent implements OnInit {
 
     this.storageService.states.subscribe((value) => {
       if (value.loadProjectData) {
+        this.addLayerShadow();
+        this.addPrincipalMapLayer();
+
         map.on('moveend', () => {
           var bbox_cam = bboxPolygon(
             this.storageService.getConfigProjet().bbox
@@ -168,6 +177,7 @@ export class MapComponent implements OnInit {
         this.handleMapParamsUrl();
         this.mapClicked();
         map.updateSize();
+
         var drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
         drawers.forEach((drawer) => {
           drawer.openedChange.subscribe(() => {
@@ -186,6 +196,56 @@ export class MapComponent implements OnInit {
         this.openRightMenu('toc');
       }
     });
+  }
+
+  //Ajouter le shadow background a la carte
+  addLayerShadow() {
+    var mapHelper = new MapHelper();
+    var layer = mapHelper.constructShadowLayer(
+      this.storageService.getConfigProjet().roiGeojson
+    );
+    layer.setZIndex(1000);
+    mapHelper.map?.addLayer(layer);
+  }
+
+  addPrincipalMapLayer() {
+    var mapHelper = new MapHelper();
+    var donnePrincipalMap = this.storageService.getPrincipalCarte();
+
+    if (donnePrincipalMap) {
+      let groupCarte = donnePrincipalMap.groupCarte;
+      let carte = donnePrincipalMap.carte;
+      donnePrincipalMap.carte.check = true;
+      var type;
+      if (carte.type == 'WMS') {
+        type = 'wms';
+      } else if (carte.type == 'xyz') {
+        type = 'xyz';
+      }
+      var layer = mapHelper.constructLayer({
+        nom: carte.nom,
+        type: type,
+        type_layer: 'geosmCatalogue',
+        url: carte.url,
+        visible: true,
+        inToc: true,
+        properties: {
+          group_id: groupCarte.id_cartes,
+          couche_id: carte.key_couche,
+          type: 'carte',
+        },
+        activeLayers: {
+          share: false,
+          metadata: true,
+          opacity: true,
+        },
+        iconImagette: environment.url_prefix + carte.image_src,
+        descriptionSheetCapabilities: undefined!,
+      });
+      map.addLayer(layer);
+      console.log(1);
+      //  mapHelper.addLayerToMap(layer);
+    }
   }
 
   getMap(): Map {
@@ -328,6 +388,24 @@ export class MapComponent implements OnInit {
       this.sidenavContainer.start.close();
     } else {
       this.sidenavContainer?.start?.open();
+    }
+  }
+
+  menuActif = 'thematiques';
+  openMenu(type) {
+    var execute = (type) => {
+      this.verticalPageSecondaireComponent?.close();
+      this.menuActif = type;
+    };
+
+    this.toogleLeftSidenav();
+    if (!this.sidenavContainer?.start?.opened) {
+      setTimeout(() => {
+        this.toogleLeftSidenav();
+        execute(type);
+      }, 200);
+    } else {
+      execute(type);
     }
   }
 }
