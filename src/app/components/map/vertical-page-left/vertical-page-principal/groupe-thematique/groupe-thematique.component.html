@@ -1,19 +1,24 @@
-<div style="display: inline-block;">
-  <div [matBadge]="length " matBadgePosition="after" matBadgeColor="warn"
-    class="border_red menu-thematiques-child text-center" [ngClass]="{ primaryColorBG: !groupThematique!.color }"
-    [ngStyle]="{ 'background-color': groupThematique!.color }" [matTooltip]="groupThematique!.nom">
-
-
-    <img src="{{ url_prefix + groupThematique!.img }}" class="img-responsive menu-thematiques-child-logo" alt="" />
-
-    <div class="text-center menu-thematiques-child-title">
-      <mat-list-item>
-        <p class="black">
-          {{ groupThematique!.nom }}
-        </p>
-      </mat-list-item>
-    </div>
+<div class="border_red col-md-12 col-xs-12 menu-thematiques-child shadow_5px text-center ">
+  <div class="menu-thematiques-child-nombre primaryColorBG white">
+    <p>{{length}}</p>
   </div>
 
+  <img src="{{url_prefix + groupThematique!.img}}" class="img-responsive col-md-4 col-xs-4 menu-thematiques-child-logo"
+    alt="">
+
+  <div class="col-md-6 col-xs-6 text-center menu-thematiques-child-title">
+    <p class="bold">{{groupThematique!.nom}}</p>
+  </div>
+
+  <div class="text-center  menu-thematiques-child-next">
+    <svg class="menu-thematiques-child-next-blanc" x="0px" y="0px" viewBox="0 0 306 306">
+      <g>
+        <g id="chevron-right">
+          <polygon points="94.35,0 58.65,35.7 175.95,153 58.65,270.3 94.35,306 247.35,153" class="chevron" />
+        </g>
+      </g>
+
+    </svg>
+  </div>
 
 </div>
