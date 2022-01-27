@@ -108,7 +108,9 @@ input {
 }
 
 .mat-drawer-inner-container {
-  overflow-x: hidden !important;
+  overflow: scroll !important;
+  overflow-y: hidden;
+  overflow-y: hidden;
 }
 
 .mat-drawer-inner-container::-webkit-scrollbar-track {
@@ -119,8 +121,8 @@ input {
 }
 
 .mat-drawer-inner-container::-webkit-scrollbar {
-  width: 5px;
-  background-color: #f7f7f7;
+  width: 0;
+  background-color:transparent;
 }
 
 .mat-drawer-inner-container::-webkit-scrollbar-thumb {
