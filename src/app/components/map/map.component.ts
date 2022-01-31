@@ -140,7 +140,6 @@ export class MapComponent implements OnInit {
           this.storageService.getExtentOfProject(true),
           6
         );
-        this.notifier.notify('success', 'Téléchargement terminé');
       },
       (error) => {
         $('.loading-apps').hide();

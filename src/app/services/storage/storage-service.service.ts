@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, from } from 'rxjs';
+import { BehaviorSubject, forkJoin, from, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {
   CarteInterface,
@@ -47,15 +47,7 @@ export class StorageServiceService {
         from(this.apiApiService.getRequest('geoportail/getAllExtents')),
         from(this.apiApiService.getRequest('config_bd_projet')),
       ])
-        .pipe(
-          catchError((err) => {
-            reject({
-              error: true,
-              msg: err,
-            });
-            return '';
-          })
-        )
+        .pipe(catchError((err) => of({ error: true, msg: err })))
         .subscribe((results) => {
           this.groupThematiques.next(results[0]);
           this.groupCartes.next(results[1]);
@@ -63,7 +55,7 @@ export class StorageServiceService {
             bbox: results[4]['bbox'],
             limites: results[4]['limites'],
             geosignetsProject: results[3],
-            roiGeojson: JSON.parse(results[2]['data']['geometry']),
+            roiGeojson: results[2]['features'][0]['geometry'],
           });
 
           this.states.getValue().loadProjectData = true;
