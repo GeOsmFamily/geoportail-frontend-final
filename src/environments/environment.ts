@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   global_logo: undefined,
-  primaryColor: '#023f5f',
+  primaryColor: '#f5ab1f',
   url_prefix: 'url_backend/',
   url_frontend: 'urlFrontend/',
   url_service: 'https://service.geo.sm/',
