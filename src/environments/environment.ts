@@ -3,18 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
+  production: false,
   global_logo: undefined,
   primaryColor: '#f5ab1f',
-  url_prefix: 'url_backend/',
-  url_frontend: 'urlFrontend/',
+  url_prefix: 'http://admincameroun.geo.sm/',
+  url_frontend: 'http://localhost:4200/',
   url_service: 'https://service.geo.sm/',
   path_qgis: '/var/www/geosm/',
-  projet_nodejs: 'pojet_nodejs_value',
-  nom: 'nomInstance',
-  countrycode: 'code_country',
+  projet_nodejs: 'cameroun',
+  nom: 'BAMAKO',
+  countrycode: 'ml',
   avaible_language: ['fr', 'en', 'es'],
-  default_language: 'langue',
+  default_language: 'fr',
 };
 
 /*

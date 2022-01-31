@@ -6,7 +6,7 @@
   margin-bottom: 20px;
   /* box-shadow:  inset 0 0 5px #fff,0 0 5px #ccc; */
   /*border: 2px solid;*/
- // border-right: none;
+  // border-right: none;
   position: relative;
 
 }
@@ -23,15 +23,15 @@
 }
 
 .menu-thematiques-child-title p {
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   position: absolute;
-  top: 39%;
+  top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width:90px
+  width: 90px
 }
 
 .menu-thematiques-child-nombre {
@@ -50,9 +50,11 @@
 
 .menu-thematiques-child-logo {
   max-height: 35px;
-  left: 0px;
+  left: 15px;
   padding: 0px !important;
   transition: 0.5s;
+  top: 14px;
+  position: absolute;
 }
 
 .menu-thematiques-child-next {
