@@ -6,15 +6,15 @@ export const environment = {
   production: false,
   global_logo: undefined,
   primaryColor: '#f5ab1f',
-  url_prefix: 'http://admincameroun.geo.sm/',
-  url_frontend: 'http://localhost:4200/',
+  url_prefix: 'url_backend/',
+  url_frontend: 'urlFrontend/',
   url_service: 'https://service.geo.sm/',
   path_qgis: '/var/www/geosm/',
-  projet_nodejs: 'cameroun',
-  nom: 'BAMAKO',
-  countrycode: 'ml',
+  projet_nodejs: 'pojet_nodejs_value',
+  nom: 'nomInstance',
+  countrycode: 'code_country',
   avaible_language: ['fr', 'en', 'es'],
-  default_language: 'fr',
+  default_language: 'langue',
 };
 
 /*
