@@ -41,7 +41,9 @@ export class StorageServiceService {
         from(
           this.apiApiService.getRequest('api/v1/RestFull/catalogAdminCartes')
         ),
-        from(this.apiApiService.getRequest('getZoneInteret')),
+        from(
+          this.apiApiService.getRequestFromOtherHost('/assets/country.geojson')
+        ),
         from(this.apiApiService.getRequest('geoportail/getAllExtents')),
         from(this.apiApiService.getRequest('config_bd_projet')),
       ])
