@@ -107,7 +107,7 @@ export class GeosmLayersService {
             },
             iconImagette: environment.url_prefix + pathImg,
             icon: environment.url_prefix + couche.img,
-            cluster: true,
+            cluster: couche.geom == 'LineString' ? false : true,
             size: size,
             legendCapabilities: {
               useCartoServer: true,
