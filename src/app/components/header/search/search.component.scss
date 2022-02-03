@@ -60,3 +60,30 @@
     margin-right: 7px;
   }
 }
+
+@media only screen and (max-width: 751px){
+/* .white::-webkit-input-placeholder::after {
+
+    content:"Rechercher";
+}
+
+*/
+
+
+  .header-search-form{
+    max-width:50%;
+    //margin: 6px auto;
+
+    margin-left: 130px;
+  }
+  .mat-input-element::placeholder{
+    content:"Rechercher";
+  }
+}
+@media (width: 667px) {
+  .header-search-form{
+
+    margin-left: 200px;
+  }
+
+}

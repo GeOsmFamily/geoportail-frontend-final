@@ -719,3 +719,19 @@ slide2 {
 .class_menu{
   text-align: center;
 }
+
+
+@media only screen and (max-width: 600px)
+{
+    .toogle-sidenav-right{
+      display:none;
+    }
+
+
+}
+@media screen and (max-height:610px) {
+  .menu{
+    display: none;
+}
+}
+
