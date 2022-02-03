@@ -325,6 +325,7 @@ export class MapHelper {
         });
       }
     } else if (couche.type == 'wfs') {
+      console.log(couche);
       var source = new VectorSource({
         format: new GeoJSON({
           dataProjection: 'EPSG:4326',
@@ -338,6 +339,7 @@ export class MapHelper {
             transformExtent(extent_view!, 'EPSG:3857', 'EPSG:4326').join(',') +
             '&SERVICE=WFS&VERSION=1.1.0&REQUEST=GETFEATURE&outputFormat=GeoJSON&typeName=' +
             couche.identifiant;
+          console.log(url);
           this.apiServiceService
             .getRequestFromOtherHostObserver(url)
             .pipe(
@@ -356,7 +358,11 @@ export class MapHelper {
             .subscribe(
               (data) => {
                 // @ts-ignore
-                source.addFeatures(source.getFormat()?.readFeatures(data)!);
+                source.addFeatures(
+                  // @ts-ignore
+                  source.getFormat()?.readFeatures(data)!
+                );
+
                 for (
                   let index = 0;
                   index < source.getFeatures().length;
@@ -364,6 +370,7 @@ export class MapHelper {
                 ) {
                   const feature = source.getFeatures()[index];
                   feature.set('featureId', feature.getId());
+                  console.log(feature);
                 }
               },
               (err: HttpErrorResponse) => {
@@ -373,14 +380,24 @@ export class MapHelper {
         },
       });
 
+      const styleFunction = function (feature) {
+        const geometry = feature.getGeometry();
+        const styles = [
+          // linestring
+          new Style({
+            stroke: new Stroke({
+              color: '#403e37',
+              width: 5,
+            }),
+          }),
+        ];
+
+        return styles;
+      };
+
       layer = new VectorLayer({
         source: source,
-        style: new Style({
-          image: new Icon({
-            scale: couche.size,
-            src: couche.icon,
-          }),
-        }),
+        style: styleFunction,
 
         className: couche.nom + '___' + couche.type_layer,
       });
@@ -461,6 +478,8 @@ export class MapHelper {
 
     if (couche.zindex) {
       this.setZindexToLayer(layer, couche.zindex);
+    } else {
+      this.setZindexToLayer(layer, this.getMaxZindexInMap() + 1);
     }
 
     if (couche.minzoom) {
@@ -814,6 +833,20 @@ export class MapHelper {
 
           callback(data_callback);
         }
+      } else {
+        var coord = this.map?.getCoordinateFromPixel(pixel!);
+        var data_callback: DataFromClickOnMapInterface = {
+          type: 'vector',
+          data: {
+            coord: coord!,
+            layers: [layer],
+            //@ts-ignore
+            feature: feature,
+            data: {},
+          },
+        };
+
+        callback(data_callback);
       }
     } else if (layers.length > 0) {
       var coord = this.map?.getCoordinateFromPixel(pixel!);
