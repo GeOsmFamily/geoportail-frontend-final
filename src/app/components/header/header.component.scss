@@ -45,9 +45,21 @@ position: absolute;
 left:30px;
 top:3px;
 max-height: 55px;
+
 }
 
 .header_left
 {
-  
+
+}
+
+@media only screen and (max-width: 751px){
+  .Logo_GC{
+    max-width:20%;
+    margin: 6px auto;
+    position: fixed;
+  }
+  .Logos_GC_right, .help_button{
+    display:none
+  }
 }

@@ -46,7 +46,7 @@
       <div fxFlex="25%" (click)="openMenu('cartes')" [ngClass]="{'back_black': menuActif === 'cartes'}"
         fxFlexAlign="center" class="three_menu pointer">
         <div class="class_menu">
-          <span>
+          <span class="menu">
             {{ 'left_menu.fonds' | translate }}
           </span>
           <svg x="0px" y="0px" viewBox="0 0 23.4 24.8" style="width: 30px;
@@ -62,7 +62,7 @@
       <div fxFlex="25%" (click)="openMenu('thematiques')" [ngClass]="{'back_black': menuActif === 'thematiques'}"
         fxFlexAlign="center" class="three_menu pointer ">
         <div class="class_menu">
-          <span>
+          <span class="menu">
             {{ 'left_menu.themes' | translate }}
           </span>
 
@@ -89,10 +89,10 @@ L17.1,14.4z" />
         </div>
 
       </div>
-      <div fxFlex="40%" fxFlexAlign="center" (click)="openMenu('ressources')"
+      <div fxFlex="30%" fxFlexAlign="center" (click)="openMenu('ressources')"
         [ngClass]="{'back_black': menuActif === 'ressources'}" class="three_menu pointer">
         <div class="class_menu">
-          <span>
+          <span class="menu">
             {{ 'left_menu.ressources' | translate }}
           </span>
 

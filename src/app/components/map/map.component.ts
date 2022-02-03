@@ -25,6 +25,7 @@ import { DataFromClickOnMapInterface } from 'src/app/interfaces/dataClickInterfa
 import { RightMenuClickComponent } from './right-menu-click/right-menu-click.component';
 import { VerticalPagePrincipalComponent } from './vertical-page-left/vertical-page-principal/vertical-page-principal.component';
 import { environment } from 'src/environments/environment';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 const scaleControl = new ScaleLine();
 var attribution = new Attribution({ collapsible: false });
@@ -119,7 +120,8 @@ export class MapComponent implements OnInit {
     public componentHelper: ComponentHelper,
     public shareService: ShareServiceService,
     private activatedRoute: ActivatedRoute,
-    public zone: NgZone
+    public zone: NgZone,
+    private observer: BreakpointObserver,
   ) {
     this.notifier = notifierService;
   }
@@ -130,6 +132,13 @@ export class MapComponent implements OnInit {
       'VerticalPageSecondaireComponent',
       this.verticalPageSecondaireComponent
     );
+    this.observer.observe(['(max-width: 767px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenavContainer?.start?.close();
+      } else {
+        this.sidenavContainer?.start?.open();
+      }
+    });
   }
 
   ngOnInit(): void {
