@@ -111,7 +111,7 @@ export interface CoucheInterface {
   /**
    * If data is from OSM
    */
-  wms_type: 'osm' | null;
+  wms_type: 'osm' | 'wms' | null;
   /**
    * Zoom max
    */

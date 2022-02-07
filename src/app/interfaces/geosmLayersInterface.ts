@@ -30,6 +30,7 @@ export interface GeosmLayer {
   iconImagette?: string;
   url?: string;
   identifiant?: string;
+  color?: string;
   /**
    * capabilities of the layer in toc. They user can set opactiy ? read metadata ?...
    * By default, all is set to true

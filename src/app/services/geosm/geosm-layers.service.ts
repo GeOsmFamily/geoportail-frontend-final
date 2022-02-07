@@ -98,6 +98,7 @@ export class GeosmLayersService {
             identifiant: couche.identifiant,
             type_layer: 'geosmCatalogue',
             url: couche.url,
+            color: couche.remplir_couleur!,
             visible: true,
             inToc: true,
             properties: {

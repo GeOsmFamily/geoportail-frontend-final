@@ -386,7 +386,7 @@ export class MapHelper {
           // linestring
           new Style({
             stroke: new Stroke({
-              color: '#403e37',
+              color: couche.color,
               width: 5,
             }),
           }),
