@@ -18,10 +18,13 @@ export class CoucheThematiqueComponent {
   constructor(public geosmLayerService: GeosmLayersService) {}
 
   disabled_couche(couche: CoucheInterface): boolean {
+    console.log(couche);
     if (
       couche['wms_type'] == 'osm' &&
       (couche['number'] == 0 || couche['number'] == null)
     ) {
+      return true;
+    } else if (couche['wms_type'] == 'wms' && couche['identifiant'] == null) {
       return true;
     } else {
       return false;
