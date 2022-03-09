@@ -68,7 +68,7 @@ export class VerticalToolbarComponent implements OnInit {
 
   previewPointMapillary;
 
-  mly;
+  mly: Viewer | undefined;
 
   mlyc;
 
@@ -127,7 +127,6 @@ export class VerticalToolbarComponent implements OnInit {
         });
       }
     });
-
     var popup_lot = new Overlay({
       element: document.getElementById('popup_lot')!,
       stopEvent: true,
@@ -184,17 +183,12 @@ export class VerticalToolbarComponent implements OnInit {
         layer &&
         feature &&
         layer.get('type') == 'mapillaryPoint' &&
-        feature.getProperties()['data']
+        feature.getProperties()
       ) {
-        var pte = feature.getProperties()['data'];
-        console.log(this.responseMapillary);
+        var pte = feature.getProperties();
         this.point = {
-          img: this.responseMapillary['features'][pte.i]['properties'][
-            'coordinateProperties'
-          ].image_keys[pte.j],
-          cas: this.responseMapillary['features'][pte.i]['properties'][
-            'coordinateProperties'
-          ].cas[pte.j],
+          img: pte['id'],
+          url: pte['thumb_256_url'],
         };
 
         var stActive = new Style({
@@ -214,12 +208,7 @@ export class VerticalToolbarComponent implements OnInit {
         var coordinate = Object.create(feature.getGeometry()!).getCoordinates();
         popup_mapillary.setPosition(coordinate);
 
-        $('#img_mappilary').attr(
-          'src',
-          'https://d1cuyjsrcm0gby.cloudfront.net/' +
-            this.point.img +
-            '/thumb-320.jpg'
-        );
+        $('#img_mappilary').attr('src', this.point.url);
 
         this.zone?.run(() => {
           this.previewPointMapillary = feature;
@@ -247,10 +236,6 @@ export class VerticalToolbarComponent implements OnInit {
         }
 
         if (this.previewPointMapillary) {
-          this.notifier.notify(
-            'success',
-            'Cliquer sur un point pour lancer la navigation'
-          );
           var st = new Style({
             image: new CircleStyle({
               radius: 4,
@@ -293,6 +278,14 @@ export class VerticalToolbarComponent implements OnInit {
       this.sidenavContainer.start.close();
     } else {
       this.sidenavContainer?.start?.open();
+    }
+  }
+
+  toogleRightSidenav() {
+    if (this.sidenavContainer?.end?.opened) {
+      this.sidenavContainer.end.close();
+    } else {
+      this.sidenavContainer?.end?.open();
     }
   }
 
@@ -444,12 +437,17 @@ export class VerticalToolbarComponent implements OnInit {
         }),
       });
 
+      var mapillaryApiKey =
+        'MLYARBnAwe8nDfgkTZA7NfPLRNpZAKIHY2cwcZB4F2jyyRpjj15HGbZAfOeYH58540n8usByYBqDBKss9OJZBH9G2KlGrVWlZA6z1TDg2WiHbdxaWUnL84ffXlRZAC1CRsAwZDZD';
+
       LayTheCopy_vector = new VectorTileLayer({
         source: new VectorTileSource({
           format: new MVT(),
           tileGrid: createXYZ({ maxZoom: 22 }),
           projection: 'EPSG:3857',
-          url: 'https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt',
+          url:
+            'https://tiles.mapillary.com/maps/vtp/mly1_public/2/{z}/{x}/{y}?access_token=' +
+            mapillaryApiKey,
         }),
       });
 
@@ -474,10 +472,18 @@ export class VerticalToolbarComponent implements OnInit {
       ) {
         this.modeMapillary = false;
 
-        this.sidenavContainer?.start?.open();
+        if (!this.sidenavContainer?.start?.opened) {
+          this.toogleLeftSidenav();
+        }
+        if (!this.sidenavContainer?.end?.opened) {
+          this.toogleRightSidenav();
+        }
+
+        if (this.mly != undefined) {
+          this.mly.remove();
+        }
         document.getElementById('mly')!.style.display = 'none';
         this.map?.setTarget('map');
-        this.map?.updateSize();
       }
 
       if (this.layerInCompare.length != 0) {
@@ -549,10 +555,40 @@ export class VerticalToolbarComponent implements OnInit {
       var bboxUrl = Amin[0] + ',' + Amin[1] + ',' + Amax[0] + ',' + Amax[1];
 
       var url_sequence =
-        'https://a.mapillary.com/v3/sequences?bbox=' +
-        bboxUrl +
-        '&client_id=QnZyMGZ1VkU0OTFWNUJRb1d5bUhBTzo4MzQ1MzY3ODhlZjA1ZWFi';
+        'https://graph.mapillary.com/images?access_token=MLYARBnAwe8nDfgkTZA7NfPLRNpZAKIHY2cwcZB4F2jyyRpjj15HGbZAfOeYH58540n8usByYBqDBKss9OJZBH9G2KlGrVWlZA6z1TDg2WiHbdxaWUnL84ffXlRZAC1CRsAwZDZD&fields=id,width,sequence,geometry,thumb_original_url,height,thumb_256_url,thumb_1024_url,thumb_2048_url,compass_angle&bbox=' +
+        bboxUrl;
       $.get(url_sequence, (data) => {
+        var responses = Array();
+
+        data.data.forEach((element) => {
+          var geometry = element.geometry;
+
+          var properties = {
+            id: element.id,
+            width: element.width,
+            sequence: element.sequence,
+            thumb_original_url: element.thumb_original_url,
+            height: element.height,
+            thumb_256_url: element.thumb_256_url,
+            thumb_1024_url: element.thumb_1024_url,
+            thumb_2048_url: element.thumb_2048_url,
+            compass_angle: element.compass_angle,
+          };
+
+          responses.push({
+            type: 'Feature',
+            geometry: geometry,
+            properties: properties,
+          });
+        });
+
+        var geojson = {
+          type: 'FeatureCollection',
+          features: responses,
+        };
+
+        console.log(geojson);
+
         var layer_mappilary;
         var layer_mappilaryPoint;
 
@@ -567,14 +603,14 @@ export class VerticalToolbarComponent implements OnInit {
         });
 
         var point = Array();
-        for (var i = 0; i < data.features.length; i++) {
+        for (var i = 0; i < geojson.features.length; i++) {
           for (
             var j = 0;
-            j < data.features[i].geometry.coordinates.length;
+            j < geojson.features[i].geometry.coordinates.length;
             j++
           ) {
             var coord = transform(
-              data.features[i].geometry.coordinates[j],
+              geojson.features[i].geometry.coordinates[j],
               'EPSG:4326',
               'EPSG:3857'
             );
@@ -588,7 +624,7 @@ export class VerticalToolbarComponent implements OnInit {
           }
         }
 
-        var vectorFeature = new GeoJSON().readFeatures(data, {
+        var vectorFeature = new GeoJSON().readFeatures(geojson, {
           dataProjection: 'EPSG:4326',
           featureProjection: 'EPSG:3857',
         });
@@ -631,19 +667,24 @@ export class VerticalToolbarComponent implements OnInit {
         this.map?.addLayer(vectorLayer);
 
         this.zone?.run(() => {
-          this.responseMapillary = data;
+          this.responseMapillary = geojson;
         });
       });
 
       this.map?.on('click', (e) => {
-        if (this.modeMapillary) {
-          this.displayViewMapillary(e.pixel, true);
-        }
+        this.map?.forEachLayerAtPixel(e.pixel, (layer) => {
+          if (this.modeMapillary && layer.get('type') == 'mapillaryPoint') {
+            this.displayViewMapillary(e.pixel, true);
+          }
+        });
       });
     }
   }
 
   displayViewMapillary(pixel, isClick) {
+    this.toogleLeftSidenav();
+    this.toogleRightSidenav();
+
     //  this.mlyc.style.display = 'none';
     var faCircleLineMarkerStyle = new Style({
       image: new CircleStyle({
@@ -716,17 +757,19 @@ export class VerticalToolbarComponent implements OnInit {
     );
 
     $('#mly').html(old_html);
+    console.log(this.point);
     this.mly = new Viewer({
-      apiClient: 'QnZyMGZ1VkU0OTFWNUJRb1d5bUhBTzo4MzQ1MzY3ODhlZjA1ZWFi',
+      accessToken:
+        'MLYARBnAwe8nDfgkTZA7NfPLRNpZAKIHY2cwcZB4F2jyyRpjj15HGbZAfOeYH58540n8usByYBqDBKss9OJZBH9G2KlGrVWlZA6z1TDg2WiHbdxaWUnL84ffXlRZAC1CRsAwZDZD',
       component: { cover: false },
       container: this.mlyc,
-      imageKey: this.point.img,
+      imageId: this.point.img,
     });
 
     if (feature) {
       if (isClick) {
-        var bearing = feature.get('ca');
-        this.mly.moveToKey(feature.get('key'));
+        var bearing = feature.get('compass_angle');
+        this.mly.moveTo(feature.get('id'));
         featureOverlay.setStyle(updateBearingStyle(bearing));
       }
     } else {
@@ -734,7 +777,7 @@ export class VerticalToolbarComponent implements OnInit {
     }
     if (feature !== highlight) {
       if (highlight) {
-        featureOverlay.getSource().removeFeature(highlight);
+        featureOverlay.getSource()?.removeFeature(highlight);
       }
 
       if (feature) {
@@ -744,19 +787,19 @@ export class VerticalToolbarComponent implements OnInit {
 
       highlight = feature;
     }
-    this.mly.on(Viewer.nodechanged, (node) => {
+    this.mly.on('image', (node) => {
       if (featureOverlay.getVisible()) {
         featureOverlay.setVisible(false);
       }
 
       var lonLat = fromLonLat([
-        node.originalLatLon.lon,
-        node.originalLatLon.lat,
+        node.image.originalLngLat.lng,
+        node.image.originalLngLat.lat,
       ]);
 
       this.map?.getView().setCenter(lonLat);
       this.newMarker.getGeometry().setCoordinates(lonLat);
-      this.newMarker.setStyle(updateBearingStyle(node.ca));
+      this.newMarker.setStyle(updateBearingStyle(node.image.compassAngle));
       this.map?.setView(new View({ center: lonLat, zoom: 18 }));
     });
 
@@ -764,10 +807,9 @@ export class VerticalToolbarComponent implements OnInit {
     console.log(this.mly);
 
     window.addEventListener('resize', () => {
-      this.mly.resize();
+      this.mly?.remove();
     });
   }
-
   toogleCompare() {
     var swipe = document.getElementById('swipe');
     var mapHelper = new MapHelper();
