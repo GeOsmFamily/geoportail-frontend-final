@@ -33,7 +33,7 @@ var attribution = new Attribution({ collapsible: false });
 var view = new View({
   center: [0, 0],
   zoom: 0,
-  minZoom: 11.8,
+  minZoom: 11,
 });
 
 export const map = new Map({
@@ -121,7 +121,7 @@ export class MapComponent implements OnInit {
     public shareService: ShareServiceService,
     private activatedRoute: ActivatedRoute,
     public zone: NgZone,
-    private observer: BreakpointObserver,
+    private observer: BreakpointObserver
   ) {
     this.notifier = notifierService;
   }
