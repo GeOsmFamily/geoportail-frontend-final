@@ -33,7 +33,7 @@ var attribution = new Attribution({ collapsible: false });
 var view = new View({
   center: [0, 0],
   zoom: 0,
-  minZoom: 11,
+  minZoom: 6,
 });
 
 export const map = new Map({
